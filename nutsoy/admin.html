@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin — Nutsoy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body class="admin-body">
+    <!-- ================= LOGIN GATE ================= -->
+    <div class="admin-login" id="admin-login">
+      <form class="admin-login-card" id="admin-login-form">
+        <div class="admin-login-logo">
+          nut<span>soy</span> <small>admin</small>
+        </div>
+        <p>Masukkan password admin untuk mengelola menu &amp; stok.</p>
+        <input
+          type="password"
+          id="admin-password"
+          placeholder="Password admin"
+          autocomplete="current-password"
+          required
+        />
+        <p class="admin-login-error" id="admin-login-error" hidden>
+          Password salah, coba lagi.
+        </p>
+        <button type="submit">Masuk</button>
+        <a href="index.html" class="admin-back-link">← Kembali ke situs</a>
+      </form>
+    </div>
+
+    <!-- ================= ADMIN PANEL ================= -->
+    <div class="admin-panel is-hidden" id="admin-panel">
+      <header class="admin-header">
+        <div class="navbar-logo">nut<span>soy</span> <small>admin</small></div>
+        <div class="admin-header-actions">
+          <a href="index.html" class="admin-view-site">
+            <i data-feather="external-link"></i>
+            Lihat situs
+          </a>
+          <button type="button" id="admin-logout">
+            <i data-feather="log-out"></i>
+            Keluar
+          </button>
+        </div>
+      </header>
+
+      <main class="admin-main">
+        <section class="admin-section">
+          <h2>Foto Profil Situs</h2>
+          <p class="admin-hint" style="margin-bottom: 20px; display: block">
+            Foto ini muncul di section "Tentang Nutsoy" dan "Tentang Owner" di
+            halaman utama. Kalau belum diisi, tetap tampil placeholder seperti
+            biasa.
+          </p>
+
+          <div class="admin-settings-row">
+            <div class="admin-settings-item">
+              <label
+                class="admin-thumb-label admin-thumb-label--lg"
+                data-target="aboutImage"
+              >
+                <span id="about-thumb-preview">🅰️</span>
+                <input
+                  type="file"
+                  accept="image/*"
+                  class="admin-settings-input"
+                  data-target="aboutImage"
+                  hidden
+                />
+              </label>
+              <span>Foto "Tentang Nutsoy"</span>
+              <button
+                type="button"
+                class="admin-remove-image"
+                data-action="remove-setting"
+                data-target="aboutImage"
+              >
+                Hapus foto
+              </button>
+            </div>
+
+            <div class="admin-settings-item">
+              <label
+                class="admin-thumb-label admin-thumb-label--lg"
+                data-target="ownerImage"
+              >
+                <span id="owner-thumb-preview">👨‍💼</span>
+                <input
+                  type="file"
+                  accept="image/*"
+                  class="admin-settings-input"
+                  data-target="ownerImage"
+                  hidden
+                />
+              </label>
+              <span>Foto Owner</span>
+              <button
+                type="button"
+                class="admin-remove-image"
+                data-action="remove-setting"
+                data-target="ownerImage"
+              >
+                Hapus foto
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section class="admin-section">
+          <h2>Tambah Produk Baru</h2>
+
+          <form class="admin-form" id="add-product-form">
+            <div class="admin-form-row">
+              <label>
+                Nama produk
+                <input
+                  type="text"
+                  id="new-name"
+                  required
+                  placeholder="Mis. Matcha Soy"
+                />
+              </label>
+              <label>
+                Emoji
+                <input
+                  type="text"
+                  id="new-emoji"
+                  required
+                  placeholder="🍵"
+                  maxlength="4"
+                />
+              </label>
+            </div>
+
+            <div class="admin-form-row">
+              <label>
+                Harga (Rp)
+                <input
+                  type="number"
+                  id="new-price"
+                  required
+                  min="0"
+                  step="500"
+                  placeholder="10000"
+                />
+              </label>
+              <label>
+                Stok
+                <input
+                  type="number"
+                  id="new-stock"
+                  required
+                  min="0"
+                  step="1"
+                  placeholder="20"
+                />
+              </label>
+              <label>
+                Kategori/rasa
+                <select id="new-flavor">
+                  <option value="original">Original</option>
+                  <option value="choco">Choco</option>
+                  <option value="strawberry">Strawberry</option>
+                  <option value="peanut">Peanut</option>
+                  <option value="other">Lainnya</option>
+                </select>
+              </label>
+            </div>
+
+            <label>
+              Deskripsi singkat
+              <input
+                type="text"
+                id="new-description"
+                placeholder="Deskripsi produk"
+              />
+            </label>
+
+            <label>
+              Foto produk (opsional, tanpa foto akan pakai emoji)
+              <input type="file" id="new-image" accept="image/*" />
+            </label>
+
+            <button type="submit" class="admin-submit">
+              <i data-feather="plus-circle"></i>
+              Tambah Produk
+            </button>
+          </form>
+        </section>
+
+        <section class="admin-section">
+          <div class="admin-section-header">
+            <h2>Kelola Menu &amp; Stok</h2>
+            <span class="admin-hint"
+              >Perubahan tersimpan otomatis &amp; langsung tampil di halaman
+              menu.</span
+            >
+          </div>
+
+          <div class="admin-product-list" id="admin-product-list">
+            <!-- diisi oleh admin.js -->
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="../js/admin.js"></script>
+  </body>
+</html>
